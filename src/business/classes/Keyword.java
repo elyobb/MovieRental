@@ -3,19 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package business;
+package business.classes;
 
 /**
  *
  * @author bpbyt3
  */
-public class Main {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        
-    }
+public class Keyword {
+    private String name;
     
+    public Keyword(String name){
+        this.name = name;
+    }
 }

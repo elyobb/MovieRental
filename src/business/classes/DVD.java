@@ -3,19 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package business;
+package business.classes;
 
 /**
  *
  * @author bpbyt3
  */
-public class Main {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        
-    }
+public class DVD {
+    private int serialNo;
+    private boolean lost;
     
+    public DVD(int serial, boolean lost){
+        this.serialNo = serial;
+        this.lost = lost;
+    }
 }
