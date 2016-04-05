@@ -12,11 +12,11 @@ package business.classes;
 public class Customer {
     private String email;
     private String address;
-    private int phoneNo;
+    private String phoneNo;
     private String password;
     private String name;
     
-    public Customer(String email, String address, int phone, String pass, String name){
+    public Customer(String email, String address, String phone, String pass, String name){
         this.email = email;
         this.address = address;
         this.phoneNo = phone;
