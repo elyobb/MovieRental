@@ -11,11 +11,29 @@ package business.classes;
  */
 public class DVD {
     private int serialNo;
-    private boolean lost;
+    private boolean late;
     private Movie movie;
-    public DVD(Movie movie, int serial, boolean lost){
+    public DVD(Movie movie, int serial){
         this.serialNo = serial;
-        this.lost = lost;
+        this.late = false;
         this.movie = movie;
+    }
+    
+    public void setLateStatus(boolean late){
+        this.late = late;
+    }
+    
+
+    
+    public Movie getMovie(){
+        return this.movie;
+    }
+    
+    public boolean getLateStatus(){
+        return this.late;
+    }
+    
+    public int getSerialNo(){
+        return this.serialNo;
     }
 }

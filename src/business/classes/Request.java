@@ -26,4 +26,25 @@ public class Request {
         this.movie = movie;
     }
     
+    public GregorianCalendar getReqDate(){
+        return this.requestDate;
+    }
+    
+    public GregorianCalendar getRespDate(){
+        return this.responseDate;
+    }
+    
+    public ReqStatus getReqStatus(){
+        return this.status;
+    }
+    
+    public Customer getCustomer(){
+        return this.customer;
+    }
+    
+    public Movie getMovie(){
+        return movie;
+    }
+    
+    
 }

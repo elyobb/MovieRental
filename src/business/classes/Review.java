@@ -18,5 +18,17 @@ public class Review {
         this.rating = rating;
         this.rental = rental;
     }
+    
+    public double getRating(){
+        return rating;
+    }
+    
+    public String getReview(){
+        return review;
+    }
+    
+    public Rental getRental(){
+        return rental;
+    }
 
 }
