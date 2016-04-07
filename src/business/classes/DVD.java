@@ -12,9 +12,10 @@ package business.classes;
 public class DVD {
     private int serialNo;
     private boolean lost;
-    
-    public DVD(int serial, boolean lost){
+    private Movie movie;
+    public DVD(Movie movie, int serial, boolean lost){
         this.serialNo = serial;
         this.lost = lost;
+        this.movie = movie;
     }
 }

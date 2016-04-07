@@ -12,8 +12,11 @@ package business.classes;
 public class Review {
     private double rating;
     private String review;
-    
-    public Review(double rating, String review){
+    private Rental rental;
+    public Review(Rental rental, double rating, String review){
         this.review = review;
+        this.rating = rating;
+        this.rental = rental;
     }
+
 }

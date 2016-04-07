@@ -15,11 +15,15 @@ public class Request {
     private GregorianCalendar requestDate;
     private GregorianCalendar responseDate;
     private ReqStatus status;
+    private Customer customer;
+    private Movie movie;
 
-    public Request(GregorianCalendar reqDate, GregorianCalendar respDate, ReqStatus status){
+    public Request(Customer customer, Movie movie, GregorianCalendar reqDate, GregorianCalendar respDate, ReqStatus status){
         this.requestDate = reqDate;
         this.responseDate = respDate;
         this.status = status;
+        this.customer = customer;
+        this.movie = movie;
     }
     
 }
