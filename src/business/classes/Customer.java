@@ -43,6 +43,16 @@ public class Customer {
         
         if (returnDate.after(cutOff)){
             System.out.println("You have been charged a late fee of $.01 / day late");
+            
+            int currDay = returnDate.get(Calendar.DAY_OF_YEAR);
+            int cutoffDay = cutOff.get(Calendar.DAY_OF_YEAR);
+            int diff = currDay - cutoffDay;
+            
+            double rate = diff * .01;
+            
+            System.out.println("Charge: $" + rate);
+            
+            
             r.getDVD().setLateStatus(true);
         }
         r.setRentedStatus(false);
