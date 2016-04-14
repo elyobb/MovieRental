@@ -31,6 +31,24 @@ public class Movie {
         this.actors = new LinkedList();
     }
     
+    public String getInfo(){
+        String info = "";
+        info += "Name: " + this.name + "\n";
+        info += "Genre: " + this.getGenre().toString() + "\n";
+        info += "Year: " + this.year + "\n";
+        info += "Keywords: ";
+        for (Keyword k : keywords){
+            info += k.getName() + ", ";
+        }
+        info += "\n";
+        info += "Actors: ";
+        for (Actor a: actors){
+            info += a.getName() + ", ";
+        }
+        info += "\n";
+        return info;
+    }
+    
     public String getName(){
         return this.name;
     }

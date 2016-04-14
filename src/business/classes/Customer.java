@@ -33,33 +33,46 @@ public class Customer {
     }
     
     public void rent(Rental r){
+        System.out.println(this.name + " wants to rent "+ r.getDVD().getMovie().getName()+ ". . .");
         rentals.add(r);
+        System.out.println(this.name + " has successfully rented "+ r.getDVD().getMovie().getName());
+                
+                
     } 
     
     public void returnRental(Rental r, GregorianCalendar returnDate){
+        
+        System.out.println(this.name+ " wants to return "+ r.getDVD().getMovie().getName()+". . .");
+        
         r.setReturnDate(returnDate);
         GregorianCalendar cutOff = r.getRentDate();
         cutOff.add(Calendar.DAY_OF_YEAR, 10);
         
         if (returnDate.after(cutOff)){
-            System.out.println("You have been charged a late fee of $.01 / day late");
+            System.out.println("But the rental is overdue.");
+            System.out.println(this.name +", you have been charged a late fee of $.01 / day.");
             
             int currDay = returnDate.get(Calendar.DAY_OF_YEAR);
             int cutoffDay = cutOff.get(Calendar.DAY_OF_YEAR);
             int diff = currDay - cutoffDay;
             
+            System.out.println("Days late : " + diff);
             double rate = diff * .01;
             
-            System.out.println("Charge: $" + rate);
-            
-            
+            System.out.println("Late fee Charge: $" + rate);
             r.getDVD().setLateStatus(true);
         }
+        System.out.println(this.name + " has successfully returned " + r.getDVD().getMovie().getName());
         r.setRentedStatus(false);
+        rentals.remove(r);
     }
     
     public void addRequest(Request r){
         requests.add(r);
+    }
+    
+    public LinkedList<Rental> getRentals(){
+        return this.rentals;
     }
     
     public LinkedList<Request> getRequests(){

@@ -19,6 +19,8 @@ public class DVD {
         this.movie = movie;
     }
     
+ 
+    
     public void setLateStatus(boolean late){
         this.late = late;
     }
@@ -37,3 +39,5 @@ public class DVD {
         return this.serialNo;
     }
 }
+    
+   

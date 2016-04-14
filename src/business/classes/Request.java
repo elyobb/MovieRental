@@ -18,20 +18,28 @@ public class Request {
     private Customer customer;
     private Movie movie;
 
-    public Request(Customer customer, Movie movie, GregorianCalendar reqDate, GregorianCalendar respDate, ReqStatus status){
+    public Request(Customer customer, Movie movie, GregorianCalendar reqDate){
         this.requestDate = reqDate;
-        this.responseDate = respDate;
         this.status = status;
         this.customer = customer;
         this.movie = movie;
+        this.status = ReqStatus.requested;
     }
     
     public GregorianCalendar getReqDate(){
         return this.requestDate;
     }
     
+    public void setReqStatus(ReqStatus newStatus){
+        this.status = newStatus;
+    }
+    
     public GregorianCalendar getRespDate(){
         return this.responseDate;
+    }
+    
+    public void setRespDate(GregorianCalendar respDate){
+        this.responseDate = respDate;
     }
     
     public ReqStatus getReqStatus(){
