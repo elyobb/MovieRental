@@ -37,13 +37,27 @@ public class Movie {
         info += "Genre: " + this.getGenre().toString() + "\n";
         info += "Year: " + this.year + "\n";
         info += "Keywords: ";
+        int counted = 0;
         for (Keyword k : keywords){
-            info += k.getName() + ", ";
+      
+            
+            info += k.getName();
+            counted++;
+            
+            if(counted != keywords.size()){
+                info += ", ";
+            }
         }
         info += "\n";
         info += "Actors: ";
+        counted = 0;
         for (Actor a: actors){
-            info += a.getName() + ", ";
+           
+            info += a.getName();
+            counted++;
+            if (counted != actors.size()){
+                info += ", ";
+            }
         }
         info += "\n";
         return info;
