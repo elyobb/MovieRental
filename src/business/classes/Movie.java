@@ -13,7 +13,7 @@ import java.util.LinkedList;
  */
 
 
-public class Movie {
+public class Movie implements Searchable{
     private Rating rating;
     private Genre genre;
     private int year;
@@ -30,6 +30,15 @@ public class Movie {
         this.keywords = new LinkedList();
         this.actors = new LinkedList();
     }
+    
+    @Override
+    public boolean contains(String data){
+        if(this.getInfo().contains(data)){
+            return true;
+        }
+        return false;
+    }
+    
     
     public String getInfo(){
         String info = "";

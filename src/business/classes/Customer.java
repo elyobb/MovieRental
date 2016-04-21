@@ -43,6 +43,7 @@ public class Customer {
     public void returnRental(Rental r, GregorianCalendar returnDate){
         
         System.out.println(this.name+ " wants to return "+ r.getDVD().getMovie().getName()+". . .");
+        System.out.println(this.name + "provides the DVD serial: " + r.getDVD().getSerialNo()+".");
         
         r.setReturnDate(returnDate);
         GregorianCalendar cutOff = r.getRentDate();

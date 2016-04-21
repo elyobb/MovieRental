@@ -20,6 +20,10 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        // implement searching for a movie based on it being matches interface
+        // rent the found movie
+        
+        
         Controller controller = new Controller();
         controller.simulateAllActivity();     
     }

@@ -92,6 +92,7 @@ public class Controller {
         addDVD(dvd5);
         
         // first let's see all the DVDs in our inventory
+        System.out.println("\nA customer wants to check what is available to rent.");
         displayAvailableDVDs();
         
         
@@ -100,11 +101,18 @@ public class Controller {
         GregorianCalendar now = new GregorianCalendar();
         now.setTimeInMillis(System.currentTimeMillis());
         
+        // jimmy wants to search for a movie like deadpool
+        search(jimmy, "pool");
+        
         // jimmy wants to rent deadpool
         Rental deadpool_rental = new Rental(jimmy, dvd1, now);
         jimmy.rent(deadpool_rental);
         
         System.out.println("\n");
+        
+        
+        // jimmy searches for a family movie
+        search(jimmy, "Family");
         
         // jimmy wants to rent minions
         Rental minions_rental = new Rental(jimmy, dvd3, now);
@@ -172,6 +180,7 @@ public class Controller {
         
         /* Finally, let's display the available DVDs showing the fact that all previously
         rented DVDs are now returned */
+        System.out.println("\nA customer wants to check what is available to rent.");
         displayAvailableDVDs();
     }
     
@@ -222,10 +231,23 @@ public class Controller {
                 }
             }
             if (!isRented){
+                System.out.println("DVD ID: "+ dvd.getSerialNo());
                 System.out.println(dvd.getMovie().getInfo());
             }
         }
         System.out.println("***********************************\n");
     }
   
+    
+    public void search(Customer c, String data){
+        String matches = "";
+        matches += c.getName()+ " searches for movies containing '"+ data + "'\n";
+        matches += "\n"; 
+        for (DVD dvd: dvds){
+            if(dvd.getMovie().contains(data)){
+                matches += dvd.getMovie().getInfo()+"\n";
+            }
+        }
+        System.out.println(matches);
+    }
 }
