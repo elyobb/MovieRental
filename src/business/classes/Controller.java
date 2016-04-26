@@ -105,8 +105,8 @@ public class Controller {
         search(jimmy, "pool");
         
         // jimmy wants to rent deadpool
-        Rental deadpool_rental = new Rental(jimmy, dvd1, now);
-        jimmy.rent(deadpool_rental);
+        Rental deadpool_rental = new Rental(jimmy, dvd1, now, false);
+        makeRental(jimmy, deadpool_rental, true); // jimmy has the money for the payment
         
         System.out.println("\n");
         
@@ -115,19 +115,19 @@ public class Controller {
         search(jimmy, "Family");
         
         // jimmy wants to rent minions
-        Rental minions_rental = new Rental(jimmy, dvd3, now);
-        jimmy.rent(minions_rental);
+        Rental minions_rental = new Rental(jimmy, dvd3, now, false);
+        makeRental(jimmy, minions_rental, true); // jimmy still has enough money
         
         System.out.println("\n");
         
         // don wants to rent deadpool
-        Rental deadpool_rental2 = new Rental(don, dvd2, now);
-        don.rent(deadpool_rental2);
+        Rental deadpool_rental2 = new Rental(don, dvd2, now, true);
+        makeRental(don, deadpool_rental2, true); // don has the required funds
         
         System.out.println("\n");
         
-        Rental taken_rental = new Rental(don, dvd4, now);
-        don.rent(taken_rental);
+        Rental taken_rental = new Rental(don, dvd4, now, true);
+        makeRental(don, taken_rental, true);
         
         System.out.println("\n");
         
@@ -138,7 +138,8 @@ public class Controller {
         System.out.println("\n");
         
         // for whatever reason, don also wants the other copy of deadpool
-        // since it is currently rented, he must log a request
+        search(don, "Deadpool");
+        System.out.println("All copies of Deadpool are unavailable. Don must take out a request.");
         Request deadpoolReq = new Request(don, deadpool, now);
         addRequest(deadpoolReq);
         
@@ -178,10 +179,17 @@ public class Controller {
         retDate4.add(Calendar.DAY_OF_YEAR, 101); // 91 days past 10 day loan cycle
         jimmy.returnRental(minions_rental, retDate4);
         
-        /* Finally, let's display the available DVDs showing the fact that all previously
+       System.out.println("\n");
+        
+        // don comes back and wants to rent godzilla in store
+        Rental godzilla_rental = new Rental(don, dvd5, now, false);
+        makeRental(don, godzilla_rental, false);  // he does not have the funds
+        
+         /* Finally, let's display the available DVDs showing the fact that all previously
         rented DVDs are now returned */
         System.out.println("\nA customer wants to check what is available to rent.");
         displayAvailableDVDs();
+        // in the final output we see that even godzilla is still available because Don failed to rent it
     }
     
     
@@ -230,24 +238,53 @@ public class Controller {
                     }
                 }
             }
-            if (!isRented){
-                System.out.println("DVD ID: "+ dvd.getSerialNo());
-                System.out.println(dvd.getMovie().getInfo());
+            System.out.println("DVD ID: "+ dvd.getSerialNo());
+            System.out.println(dvd.getMovie().getInfo());
+            if (isRented){
+                System.out.println("Status: Unavailable");
+                
             }
+            else{
+                System.out.println("Status: Available");
+            }
+            System.out.println("");
         }
         System.out.println("***********************************\n");
     }
   
     
-    public void search(Customer c, String data){
-        String matches = "";
-        matches += c.getName()+ " searches for movies containing '"+ data + "'\n";
-        matches += "\n"; 
+    public void search(Customer cust, String data){
+       
+        System.out.println(cust.getName()+ " searches for movies containing '"+ data + "'\n");
+        
         for (DVD dvd: dvds){
             if(dvd.getMovie().contains(data)){
-                matches += dvd.getMovie().getInfo()+"\n";
+                boolean isRented = false;
+                for(Customer c : this.customers){
+                    for(Rental r : c.getRentals()){
+                        if (r.getDVD().getSerialNo() == dvd.getSerialNo()){
+                            isRented = true;
+                        }
+                    }
+                }
+                System.out.println("DVD ID: "+ dvd.getSerialNo());
+                System.out.println(dvd.getMovie().getInfo());
+                if (isRented){
+                    System.out.println("Status: Unavailable");
+                }
+                else{
+                    System.out.println("Status: Available");
+                }
+                System.out.println("");
+
+               
             }
         }
-        System.out.println(matches);
+        
+    }
+    
+    public void makeRental(Customer c, Rental r, boolean paymentMade){
+            c.rent(r, paymentMade);           
+
     }
 }

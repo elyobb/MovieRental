@@ -68,7 +68,7 @@ public class Movie implements Searchable{
                 info += ", ";
             }
         }
-        info += "\n";
+
         return info;
     }
     

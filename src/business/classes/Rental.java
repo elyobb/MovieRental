@@ -19,14 +19,16 @@ public class Rental {
     private DVD dvd;
     private Customer customer;
     private Review review;
+    private boolean byMail;
     
-    public Rental(Customer customer, DVD dvd, GregorianCalendar rentDate){
+    public Rental(Customer customer, DVD dvd, GregorianCalendar rentDate, boolean byMail){
         this.rentDate = rentDate;
         this.returnDate = new GregorianCalendar(); // this will be changed upon return
         this.rentStatus = true; // this will be changed on return
         this.dvd = dvd;
         this.customer = customer;
         this.review = null;
+        this.byMail = byMail; 
     }
     
     // make sure the rental can only have 1 review
@@ -72,4 +74,12 @@ public class Rental {
         return this.customer;
     }
     
+    public String getType(){
+        if(byMail){
+            return " by Mail . . .";
+        }
+        else{
+            return " in-store . . .";
+        }
+    }
 }

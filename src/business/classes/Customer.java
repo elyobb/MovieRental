@@ -5,6 +5,8 @@
  */
 package business.classes;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.LinkedList;
@@ -32,8 +34,17 @@ public class Customer {
         this.rentals = new LinkedList();
     }
     
-    public void rent(Rental r){
-        System.out.println(this.name + " wants to rent "+ r.getDVD().getMovie().getName()+ ". . .");
+    public void rent(Rental r, boolean paymentMade){
+        String output = "";
+        output += this.name + " wants to rent "+ r.getDVD().getMovie().getName() + r.getType();
+        System.out.println(output);
+        if(!paymentMade){
+            System.out.println(this.name + "did not make the required payment. Aborting rental.");
+            return;
+        }
+        else{
+            System.out.println(this.name + " made the rental payment.");
+        }
         rentals.add(r);
         System.out.println(this.name + " has successfully rented "+ r.getDVD().getMovie().getName());
                 
@@ -43,11 +54,12 @@ public class Customer {
     public void returnRental(Rental r, GregorianCalendar returnDate){
         
         System.out.println(this.name+ " wants to return "+ r.getDVD().getMovie().getName()+". . .");
-        System.out.println(this.name + "provides the DVD serial: " + r.getDVD().getSerialNo()+".");
+        System.out.println(this.name + " provides the DVD serial: " + r.getDVD().getSerialNo()+".");
         
         r.setReturnDate(returnDate);
         GregorianCalendar cutOff = r.getRentDate();
-        cutOff.add(Calendar.DAY_OF_YEAR, 10);
+        // the late return cutoff is 7 days 
+        cutOff.add(Calendar.DAY_OF_YEAR, 07);
         
         if (returnDate.after(cutOff)){
             System.out.println("But the rental is overdue.");
@@ -58,9 +70,13 @@ public class Customer {
             int diff = currDay - cutoffDay;
             
             System.out.println("Days late : " + diff);
-            double rate = diff * .01;
             
-            System.out.println("Late fee Charge: $" + rate);
+            DecimalFormat df = new DecimalFormat("#.##");
+            df.setRoundingMode(RoundingMode.CEILING);
+            Number rate = diff * .01;
+            double rateDecimal = rate.doubleValue();
+            
+            System.out.println("Late fee Charge: $" + df.format(rateDecimal));
             r.getDVD().setLateStatus(true);
         }
         System.out.println(this.name + " has successfully returned " + r.getDVD().getMovie().getName());
